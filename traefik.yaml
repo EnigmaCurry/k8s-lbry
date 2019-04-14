@@ -1,0 +1,19 @@
+dashboard:
+  enabled: 'true'
+  #domain: 'traefik.rymcg.tech'
+rbac:
+  enabled: true
+ssl:
+  enabled: true
+  enforced: true
+acme:
+  staging: false
+  enabled: true
+  email: 'letsencrypt@enigmacurry.com'
+  challengeType: dns-01
+  dnsProvider:
+    name: digitalocean
+  domains:
+    enabled: true
+    domainsList:
+      - main: '*.rymcg.tech'
