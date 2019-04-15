@@ -20,8 +20,6 @@ RUN apt-get update && \
   chown -R lbrycrd:lbrycrd /data && \
   chmod -R 755 /data
 
-COPY start.sh /usr/local/bin/start
-
 VOLUME ["/data"]
 
 ## Exposing daemon port and RPC port
@@ -30,4 +28,4 @@ EXPOSE 9245 9246
 USER lbrycrd
 WORKDIR /data
 
-CMD ["start"]
+CMD ["lbrycrdd -server -conf=/etc/lbry/lbrycrd.conf -printtoconsole"]
