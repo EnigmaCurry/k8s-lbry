@@ -12,7 +12,6 @@ write_files:
       datadir=/data
       rpcuser=test
       rpcpassword=test
-      rpcport=18332
       regtest=0
       server=1
       txindex=1
@@ -32,9 +31,8 @@ write_files:
       ExecStart=/snap/bin/docker run \
         --rm \
         --name lbrycrd \
-        -p 9245:9245 \
-        -p 127.0.0.1:9246:9246 \
-        -p 127.0.0.1:18332:18332 \
+        -p 9246:9246 \
+        -p 127.0.0.1:9245:9245 \
         --mount type=volume,source=lbrycrd-data,target=/data \
         --mount type=bind,source=/etc/lbry/lbrycrd.conf,target=/etc/lbry/lbrycrd.conf \
         --hostname lbrycrd \
