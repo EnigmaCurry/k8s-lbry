@@ -15,7 +15,8 @@ RUN apt-get update && \
   unzip lbrycrd-linux.zip && \
   rm lbrycrd-linux.zip && \
   chmod +x lbrycrdd lbrycrd-cli lbrycrd-tx && \
-  mkdir -p /data/.lbrycrd && \
+  mkdir -p /etc/lbry && \
+  mkdir -p /data && \
   chown -R lbrycrd:lbrycrd /data && \
   chmod -R 755 /data
 

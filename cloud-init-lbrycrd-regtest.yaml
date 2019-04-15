@@ -1,0 +1,23 @@
+#cloud-config
+
+## Setup Docker on Ubuntu 18.04
+## Run lbrycrd docker container in REGTEST configuration (TESTNET)
+## This config does not use kubernetes
+
+write_files:
+  - path: "/etc/lbry/lbrycrd.conf"
+    content: |
+      rpcuser=test
+      rpcpassword=test
+      rpcport=18332
+      regtest=1
+      server=1
+      txindex=1
+      daemon=1
+      listen=0
+      discover=0
+
+runcmd:
+  - apt-get update
+  - snap install docker
+  

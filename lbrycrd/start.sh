@@ -12,12 +12,12 @@ echo "rpcbind=0.0.0.0" >> /data/.lbrycrd/lbrycrd.conf
 ## Control this invocation through envvar.
 case $RUN_MODE in
   default )
-    su -c "lbrycrdd -server -conf=/data/.lbrycrd/lbrycrd.conf -printtoconsole" lbrycrd
+    su -c "lbrycrdd -server -conf=/data/lbrycrd.conf -printtoconsole" lbrycrd
     ;;
   reindex )
-    su -c "lbrycrdd -server -txindex -reindex -conf=/data/.lbrycrd/lbrycrd.conf -printtoconsole" lbrycrd
+    su -c "lbrycrdd -server -txindex -reindex -conf=/data/lbrycrd.conf -printtoconsole" lbrycrd
     ;;
   chainquery )
-    su -c "lbrycrdd -server -txindex -conf=/data/.lbrycrd/lbrycrd.conf -printtoconsole" lbrycrd
+    su -c "lbrycrdd -server -txindex -conf=/data/lbrycrd.conf -printtoconsole" lbrycrd
     ;;
 esac
