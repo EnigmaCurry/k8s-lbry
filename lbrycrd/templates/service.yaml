@@ -8,12 +8,12 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  type: {{ .Values.service.type }}
+  type: LoadBalancer
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: 9245
+      targetPort: lbry
       protocol: TCP
-      name: http
+      name: lbry
   selector:
     app.kubernetes.io/name: {{ include "lbrycrd.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

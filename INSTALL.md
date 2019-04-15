@@ -89,3 +89,6 @@ helm install stable/docker-registry -f docker-registry/values.yaml --name docker
 
 ## lbrycrd
 
+```
+helm install lbrycrd -f lbrycrd/values.yaml --name lbrycrd
+```
