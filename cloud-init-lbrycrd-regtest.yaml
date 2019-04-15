@@ -53,4 +53,4 @@ runcmd:
   - snap install docker
   - until docker ps; do echo "Waiting for docker startup..."; sleep 1; done; echo "Docker is up."
   - docker volume create lbrycrd-data
-  - echo "ready to go"
+  - systemctl enable --now lbrycrd
