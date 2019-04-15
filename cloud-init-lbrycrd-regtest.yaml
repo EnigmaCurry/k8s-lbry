@@ -1,23 +1,56 @@
 #cloud-config
 
-## Setup Docker on Ubuntu 18.04
-## Run lbrycrd docker container in REGTEST configuration (TESTNET)
-## This config does not use kubernetes
+## DigitalOcean user-data for Ubuntu 18.04 droplet
+## Installs docker
+## Setup systemd service for lbrycrd
+## Configure lbrycrd for REGTEST configuration (TESTNET)
+## (This config just runs docker on vanilla Ubuntu,
+##  it uses systemd inplace of docker-compose or kubernetes.)
 
 write_files:
   - path: "/etc/lbry/lbrycrd.conf"
     content: |
+      datadir=/data
       rpcuser=test
       rpcpassword=test
       rpcport=18332
       regtest=1
       server=1
       txindex=1
-      daemon=1
+      daemon=0
       listen=0
       discover=0
 
+  - path: "/etc/systemd/system/lbrycrd.service"
+    content: |
+      [Unit]
+      Description=lbrycrd docker container
+      After=snap.docker.dockerd.service
+      Requires=snap.docker.dockerd.service
+
+      [Service]
+      TimeoutStartSec=0
+      ExecStartPre=-/snap/bin/docker kill lbrycrd
+      ExecStart=/snap/bin/docker run \
+        --rm \
+        --name lbrycrd \
+        -p 9245:9245 \
+        -p 127.0.0.1:9246:9246 \
+        -p 127.0.0.1:18332:18332 \
+        --mount type=volume,source=lbrycrd-data,target=/data \
+        --mount type=bind,source=/etc/lbry/lbrycrd.conf,target=/etc/lbry/lbrycrd.conf \
+        -e RUN_MODE=default \
+        enigmacurry/lbrycrd start
+      Restart=always
+      RestartSec=120
+
+      [Install]
+      WantedBy=multi-user.target
+
 runcmd:
   - apt-get update
+  - DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
   - snap install docker
-  
+  - until docker ps; do echo "Waiting for docker startup..."; sleep 1; done; echo "Docker is up."
+  - docker volume create lbrycrd-data
+  - echo "ready to go"
