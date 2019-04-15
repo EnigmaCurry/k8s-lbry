@@ -28,7 +28,7 @@ write_files:
 
       [Service]
       TimeoutStartSec=0
-      ExecStartPre=-/snap/bin/docker kill lbrycrd
+      ExecStartPre=-/snap/bin/docker stop lbrycrd
       ExecStart=/snap/bin/docker run \
         --rm \
         --name lbrycrd \
@@ -40,6 +40,7 @@ write_files:
         --hostname lbrycrd \
         -e RUN_MODE=default \
         enigmacurry/lbrycrd
+      ExecStop=/snap/bin/docker stop lbrycrd
       Restart=always
       RestartSec=120
 
