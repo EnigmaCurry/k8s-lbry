@@ -3,12 +3,12 @@
 ## Control this invocation through envvar.
 case $RUN_MODE in
   default )
-    su -c "lbrycrdd -server -conf=/data/lbrycrd.conf -printtoconsole" lbrycrd
+    lbrycrdd -server -conf=/data/lbrycrd.conf -printtoconsole
     ;;
   reindex )
-    su -c "lbrycrdd -server -txindex -reindex -conf=/data/lbrycrd.conf -printtoconsole" lbrycrd
+    lbrycrdd -server -txindex -reindex -conf=/data/lbrycrd.conf -printtoconsole
     ;;
   chainquery )
-    su -c "lbrycrdd -server -txindex -conf=/data/lbrycrd.conf -printtoconsole" lbrycrd
+    lbrycrdd -server -txindex -conf=/data/lbrycrd.conf -printtoconsole
     ;;
 esac
