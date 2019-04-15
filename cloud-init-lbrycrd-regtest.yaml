@@ -35,8 +35,8 @@ write_files:
         --rm \
         --name lbrycrd \
         -p 9245:9245 \
-        -p 127.0.0.1:9246:9246 \
-        -p 127.0.0.1:18332:18332 \
+        # -p 127.0.0.1:9246:9246 \
+        # -p 127.0.0.1:18332:18332 \
         --mount type=volume,source=lbrycrd-data,target=/data \
         --mount type=bind,source=/etc/lbry/lbrycrd.conf,target=/etc/lbry/lbrycrd.conf \
         --hostname lbrycrd
