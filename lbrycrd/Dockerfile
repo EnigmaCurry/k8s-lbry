@@ -28,4 +28,4 @@ EXPOSE 9245 9246
 USER lbrycrd
 WORKDIR /data
 
-CMD ["lbrycrdd -server -conf=/etc/lbry/lbrycrd.conf -printtoconsole"]
+CMD /usr/bin/lbrycrdd -server -conf=/etc/lbry/lbrycrd.conf -printtoconsole
