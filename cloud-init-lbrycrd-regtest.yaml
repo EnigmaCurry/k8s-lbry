@@ -37,7 +37,7 @@ write_files:
         -p 127.0.0.1:18332:18332 \
         --mount type=volume,source=lbrycrd-data,target=/data \
         --mount type=bind,source=/etc/lbry/lbrycrd.conf,target=/etc/lbry/lbrycrd.conf \
-        --hostname lbrycrd
+        --hostname lbrycrd \
         -e RUN_MODE=default \
         enigmacurry/lbrycrd
       Restart=always
@@ -57,3 +57,4 @@ runcmd:
   - until /snap/bin/docker ps; do echo "Waiting for docker startup..."; sleep 1; done; echo "Docker is up."
   - /snap/bin/docker volume create lbrycrd-data
   - systemctl enable --now lbrycrd
+  - echo "Good to go."
