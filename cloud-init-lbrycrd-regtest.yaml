@@ -39,6 +39,7 @@ write_files:
         -p 127.0.0.1:18332:18332 \
         --mount type=volume,source=lbrycrd-data,target=/data \
         --mount type=bind,source=/etc/lbry/lbrycrd.conf,target=/etc/lbry/lbrycrd.conf \
+        --hostname lbrycrd
         -e RUN_MODE=default \
         enigmacurry/lbrycrd
       Restart=always
@@ -47,6 +48,10 @@ write_files:
       [Install]
       WantedBy=multi-user.target
 
+  - path: "/root/.bash_aliases"
+    content: |
+      alias lbrycrd-cli="docker exec lbrycrd lbrycrd-cli -conf=/etc/lbry/lbrycrd.conf"
+
 runcmd:
   - apt-get update
   - DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
@@ -54,3 +59,4 @@ runcmd:
   - until docker ps; do echo "Waiting for docker startup..."; sleep 1; done; echo "Docker is up."
   - docker volume create lbrycrd-data
   - systemctl enable --now lbrycrd
+  - 
