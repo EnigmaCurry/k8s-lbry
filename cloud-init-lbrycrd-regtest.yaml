@@ -57,4 +57,3 @@ runcmd:
   - until docker ps; do echo "Waiting for docker startup..."; sleep 1; done; echo "Docker is up."
   - docker volume create lbrycrd-data
   - systemctl enable --now lbrycrd
-  - 
