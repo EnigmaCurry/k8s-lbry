@@ -54,6 +54,6 @@ runcmd:
   - apt-get update
   - DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
   - snap install docker
-  - until docker ps; do echo "Waiting for docker startup..."; sleep 1; done; echo "Docker is up."
-  - docker volume create lbrycrd-data
+  - until /snap/bin/docker ps; do echo "Waiting for docker startup..."; sleep 1; done; echo "Docker is up."
+  - /snap/bin/docker volume create lbrycrd-data
   - systemctl enable --now lbrycrd
