@@ -92,3 +92,9 @@ helm install stable/docker-registry -f docker-registry/values.yaml --name docker
 ```
 helm install lbrycrd -f lbrycrd/values.yaml --name lbrycrd
 ```
+## nginx-ingress
+
+As an altenative to traefik.
+
+https://github.com/jetstack/cert-manager/blob/master/docs/tutorials/acme/quick-start/index.rst
+
