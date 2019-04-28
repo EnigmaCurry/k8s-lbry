@@ -1,0 +1,4 @@
+service: echo1
+hostname: echo1.example.com
+certManagerIssuer: letsencrypt-prod
+
