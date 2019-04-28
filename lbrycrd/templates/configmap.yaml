@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "lbrycrd.fullname" . }}
+  labels:
+    app: {{ template "lbrycrd.name" . }}
+    chart: {{ template "lbrycrd.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+{{ toYaml .Values.configurationFile | indent 2 }}

@@ -1,0 +1,28 @@
+image:
+  repository: lbry/lbrycrd
+  tag: linux-x86_64-production
+  pullPolicy: IfNotPresent
+
+service:
+  port: 9246
+  rpcPort: 9245
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 50Gi
+
+configurationFile:
+  lbrycrd.conf: |-
+    datadir=/data
+    port=9246
+    rpcuser=lbry
+    rpcpassword=lbry
+    rpcport=9245
+    rpcallowip=10.245.0.0/16
+    regtest=0
+    server=1
+    txindex=1
+    daemon=0
+    listen=1
+
